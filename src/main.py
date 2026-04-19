@@ -1,1 +1,3 @@
-from src.gui import *
+from gui import App
+
+App()
