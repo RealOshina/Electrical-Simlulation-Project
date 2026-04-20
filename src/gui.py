@@ -8,12 +8,13 @@ class App(tk.Frame):
         self.pack()
 
         self.create_menubar()
+        self.create_buildmenu()
 
     def create_menubar(self):
         menubar = tk.Menu(self)
 
         filemenu = tk.Menu(menubar, tearoff=0)
-        filemenu.add_command(label="New", command=lambda: print("New File"))
+        filemenu.add_command(label="New", command=lambda: self.newfile())
         filemenu.add_command(label="Open", command=lambda: print("Open File"))
         filemenu.add_command(label="Save", command=lambda: print("Save File"))
         filemenu.add_command(label="Save as", command=lambda: print("Save As File"))
@@ -49,9 +50,23 @@ class App(tk.Frame):
         menubar.add_cascade(label="Help", menu=helpmenu)
         root.config(menu=menubar)
     def create_buildmenu(self):
-        pass
+        buildmenu_frame = tk.Frame(self, bg="lightgray", padx=5, pady=5)
+        buildmenu_frame.pack()
+
+        scrollbar = tk.Scrollbar(buildmenu_frame, orient="horizontal")
+        scrollbar.pack(side="bottom", fill="x")
+
+        canvas = tk.Canvas(buildmenu_frame, bg="blue", height=100)
+        canvas.config(xscrollcommand=scrollbar.set)
+        canvas.pack()
+
+        frame_a = tk.Frame(canvas, width=50, height=50, bg="green")
+        frame_a.pack()
+
+        frame_b = tk.Frame(canvas, width=50, height=50, bg="green")
+        frame_b.pack()
     def newfile(self):
-        pass
+        print("A")
     def simulate(self):
         pass
 

@@ -43,6 +43,9 @@ This is a simplified simulation and may contain bugs or inaccuracy simulation.**
 
 - Ohmic & Non-Ohmic Conductors:   https://www.electronics-notes.com/articles/basic_concepts/resistance/ohmic-nonohmic-linear-conductors.php
 
+
+- Electrical Energy: https://www.electronics-tutorials.ws/dccircuits/electrical-energy.html
+
 ## License
 This project is licensed under the MIT License.
 
