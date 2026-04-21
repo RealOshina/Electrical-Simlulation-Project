@@ -1,3 +1,4 @@
 from gui import App
 
-App()
+app = App()
+app.mainloop()

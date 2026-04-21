@@ -1,38 +1,63 @@
 class ohms_law:
-    def __init__(self, voltage, current, resistance):
-        self.voltage = voltage
-        self.current = current
-        self.resistance = resistance
+    def __init__(self, values):
+        self.voltage, self.current, self.resistance = values
+        self.calculate()
     def calculate_voltage(self):
-        # V = I x R
-        self.voltage = self.current * self.resistance
-        print(self.voltage)
+        return self.current * self.resistance
     def calculate_current(self):
-        # I = V / R
-        self.current = self.voltage / self.resistance
-        print(self.current)
+        return self.voltage / self.resistance
     def calculate_resistance(self):
-        # R = V / I
-        self.resistance = self.voltage / self.current
-        print(self.resistance)
+        return self.voltage / self.current
+    def calculate(self):
+        if self.voltage is None and self.current is not None and self.resistance is not None: 
+            self.voltage = self.calculate_voltage()
+        elif self.current is None and self.voltage is not None and self.resistance is not None: 
+            self.current = self.calculate_current()
+        elif self.resistance is None and self.voltage is not None and self.current is not None: 
+            self.resistance = self.calculate_resistance()
 
-class electrical_energy:
-    def __init__(self, energy, power, time, voltage, current, capacitance, resistance, charge):
-        self.energy = energy
-        self.power = power
-        self.time = time
-        self.voltage = voltage
-        self.current = current
-        self.capacitance = capacitance
-        self.resistance = resistance
-        self.charge = charge
-    #def calculate_
+        self.result = [self.voltage, self.current, self.resistance]
+    def __str__(self):
+        return str(self.result)
 
-x = ohms_law(None, 2.5, 2)
-x.calculate_voltage()
+class kirchhoffs_current_law:
+    def __init__(self, values):
+        self.current_out = values[0]
+        self.current_in = values[1:]
+        
+        self.check()
+    def calculate_current_out(self):
+        print("Calculate Current Out")
+    def calculate_current_in(self):
+        print("Calculate Current In")
+    def calculate_current_in_out(self):
+        print("Calculate Current In and Out")
+    def check(self):
+        sort = []
 
-y = ohms_law(5, None, 2)
-y.calculate_current()
+        for x in self.current_in:
+            print(x)
+            if x is not None:
+                sort.extend(x)
 
-z = ohms_law(5, 2.5, None)
-z.calculate_resistance()
+        current_in_none = any(x is None for x in sort)
+
+        if self.current_out is None and current_in_none:
+            self.calculate_current_in_out()
+        elif not self.current_out is None and current_in_none:
+            self.calculate_current_in()
+        elif self.current_out is None and not current_in_none:
+            self.calculate_current_out()
+    def calculate(self):
+        pass
+
+a = [None, [2, 2]]
+
+x = kirchhoffs_current_law(a)
+
+"""
+a = [None, 2.5, 4]
+
+z = ohms_law(a)
+print(z.result)
+"""
