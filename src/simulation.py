@@ -20,41 +20,71 @@ class ohms_law:
     def __str__(self):
         return str(self.result)
 
+class electrical_power:
+    def __init__(self, values):
+        pass
+
+class electrical_energy:
+    def __init__(self):
+        pass
+
 class kirchhoffs_current_law:
     def __init__(self, values):
         self.current_out = values[0]
         self.current_in = values[1:]
+
+        for x in self.current_in:
+            self.result = [self.current_out, x]
         
         self.check()
     def calculate_current_out(self):
-        print("Calculate Current Out")
+        for x in self.current_in:
+            self.current_out = sum(x)
+            self.result = [self.current_out, x]
     def calculate_current_in(self):
-        print("Calculate Current In")
+        a = []
+        b = []
+
+        for i, x in enumerate(self.current_in):
+            for z, y in enumerate(x):
+                if y is None:
+                    a.append((z))
+        
+        if len(a) < 2:
+            self.result = [self.current_out, self.current_out]
+        elif len(a) == 2:
+            
+            self.result = [self.current_out, []]
     def calculate_current_in_out(self):
         print("Calculate Current In and Out")
     def check(self):
         sort = []
 
         for x in self.current_in:
-            print(x)
             if x is not None:
                 sort.extend(x)
-
         current_in_none = any(x is None for x in sort)
 
         if self.current_out is None and current_in_none:
             self.calculate_current_in_out()
+            print("a")
         elif not self.current_out is None and current_in_none:
             self.calculate_current_in()
+            print("b")
         elif self.current_out is None and not current_in_none:
             self.calculate_current_out()
-    def calculate(self):
-        pass
+            print("c")
+        else:
+            print("Nothing to Calculate")
+    def __str__(self):
+        return str(self.result)
 
-a = [None, [2, 2]]
+"""
+a = [9, [None, 3]]
 
 x = kirchhoffs_current_law(a)
-
+print(x.result)
+"""
 """
 a = [None, 2.5, 4]
 
