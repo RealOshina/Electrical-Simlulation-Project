@@ -1,4 +1,4 @@
-from src.gui import App
+from gui.gui import App
 
 def main():
     app = App()

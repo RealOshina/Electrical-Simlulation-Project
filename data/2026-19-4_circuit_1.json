@@ -1,0 +1,24 @@
+{
+  "nodes": [0, 1, 2],
+
+  "components": [
+    {
+      "type": "voltage_source",
+      "n1": 0,
+      "n2": 1,
+      "value": 5
+    },
+    {
+      "type": "resistor",
+      "n1": 1,
+      "n2": 2,
+      "value": 100
+    },
+    {
+      "type": "resistor",
+      "n1": 2,
+      "n2": 0,
+      "value": 200
+    }
+  ]
+}
