@@ -1,43 +1,62 @@
 class ohms_law:
     def __init__(self, values):
         self.voltage, self.current, self.resistance = values
-        self.calculate()
+        self.check()
     def calculate_voltage(self):
         return self.current * self.resistance
     def calculate_current(self):
         return self.voltage / self.resistance
     def calculate_resistance(self):
         return self.voltage / self.current
-    def calculate(self):
+    def check(self):
         if self.voltage is None and self.current is not None and self.resistance is not None: 
             self.voltage = self.calculate_voltage()
         elif self.current is None and self.voltage is not None and self.resistance is not None: 
             self.current = self.calculate_current()
         elif self.resistance is None and self.voltage is not None and self.current is not None: 
             self.resistance = self.calculate_resistance()
+        else:
+            self.result = [self.voltage, self.current, self.resistance]
 
         self.result = [self.voltage, self.current, self.resistance]
     def __str__(self):
         return str(self.result)
 
-class electrical_power:
+class electrical_power(ohms_law):
     def __init__(self, values):
-        self.voltage, self.current, self.resistance = values
+        self.power = values[0]
+        self.voltage, self.current, self.resistance = values[1]
+        super().__init__(values[1])
+        self.check()
     def calculate_vi(self):
-        pass
+        return self.voltage * self.current
     def calculate_ir(self):
-        pass
+        return (self.current ** 2) * self.resistance
     def calculate_vr(self):
-        pass
-    def check(self):     
-        if self.voltage is None and self.current is not None and self.resistance is not None: 
-            self.voltage = self.calculate_vi()
-        elif self.current is None and self.voltage is not None and self.resistance is not None: 
-            self.current = self.calculate_vr()
-        elif self.resistance is None and self.voltage is not None and self.current is not None: 
-            self.resistance = self.calculate_vi()
+        return (self.voltage ** 2) / self.resistance
+    def check(self):
+        if self.power is None:
+            if self.voltage is None and self.current is not None and self.resistance is not None: 
+                self.power = self.calculate_ir()
+            elif self.current is None and self.voltage is not None and self.resistance is not None: 
+                self.power = self.calculate_vr()
+            elif self.resistance is None and self.voltage is not None and self.current is not None: 
+                self.power = self.calculate_vi()
+            else:
+                self.power = self.calculate_vi()
+        elif self.power is not None:
+            if self.voltage is None and self.current is not None and self.resistance is not None: 
+                self.voltage = self.calculate_voltage()
+            elif self.current is None and self.voltage is not None and self.resistance is not None: 
+                self.current = self.calculate_current()
+            elif self.resistance is None and self.voltage is not None and self.current is not None: 
+                self.resistance = self.calculate_resistance()
+            else:
+                self.result = [self.power, [self.voltage, self.current, self.resistance]]
+        else:
+            self.result = [self.power, [self.voltage, self.current, self.resistance]]
 
-        self.result = [self.voltage, self.current, self.resistance]
+        self.result = [self.power, [self.voltage, self.current, self.resistance]]
     def __str__(self):
         return str(self.result)
 
@@ -95,8 +114,8 @@ class kirchhoffs_current_law:
     def __str__(self):
         return str(self.result)
 
-a = [5, 2.5, 2]
-y = electrical_energy(a)
+a = [12.5, [5, 2.5, 2]]
+y = electrical_power(a)
 print(y.result)
 
 """
