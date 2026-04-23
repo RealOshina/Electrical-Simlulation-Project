@@ -1,14 +1,14 @@
 import tkinter as tk
 from tkinter import ttk
-import simulation
+#import simulation
 
 class App(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.pack()
 
-        self.create_menubar()
-        self.create_buildmenu()
+        #self.create_menubar()
+        #self.create_buildmenu()
 
     def create_menubar(self):
         menubar = tk.Menu(self)

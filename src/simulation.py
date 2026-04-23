@@ -22,11 +22,27 @@ class ohms_law:
 
 class electrical_power:
     def __init__(self, values):
+        self.voltage, self.current, self.resistance = values
+    def calculate_vi(self):
         pass
+    def calculate_ir(self):
+        pass
+    def calculate_vr(self):
+        pass
+    def check(self):     
+        if self.voltage is None and self.current is not None and self.resistance is not None: 
+            self.voltage = self.calculate_vi()
+        elif self.current is None and self.voltage is not None and self.resistance is not None: 
+            self.current = self.calculate_vr()
+        elif self.resistance is None and self.voltage is not None and self.current is not None: 
+            self.resistance = self.calculate_vi()
+
+        self.result = [self.voltage, self.current, self.resistance]
+    def __str__(self):
+        return str(self.result)
 
 class electrical_energy:
-    def __init__(self):
-        pass
+    pass
 
 class kirchhoffs_current_law:
     def __init__(self, values):
@@ -78,6 +94,10 @@ class kirchhoffs_current_law:
             print("Nothing to Calculate")
     def __str__(self):
         return str(self.result)
+
+a = [5, 2.5, 2]
+y = electrical_energy(a)
+print(y.result)
 
 """
 a = [9, [None, 3]]
