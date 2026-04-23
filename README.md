@@ -1,4 +1,6 @@
 # Electrical-Simulation-Project
+Still Work in Progress.
+
 A learning project for Programming, Electrical Engineering concepts, and logical thinking.
 
 This project simulates electrical circuits using:
