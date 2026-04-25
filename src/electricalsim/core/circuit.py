@@ -29,7 +29,7 @@ _COMPONENT = {
 class Circuit:
     def __init__(self, data):
         self.data = data
-        self.node = data["nodes"]
+        self.nodes = data["nodes"]
         self.components = data["components"]
         self.valid_check(self.components)
     def valid_check(self, components):

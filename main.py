@@ -1,4 +1,4 @@
-from electricalsim import Loader, Circuit
+from electricalsim import Loader, Circuit, Solver
 from electricalsim import VoltageSource, Resistor
 
 def main():
@@ -9,5 +9,7 @@ def main():
     except ValueError as e:
         print(e)
 
+    solver = Solver(circuit)
+
 if __name__ == "__main__":
-    main()
+    main()  
