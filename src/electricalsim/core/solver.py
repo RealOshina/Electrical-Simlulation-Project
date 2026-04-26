@@ -1,5 +1,5 @@
 class Solver:
-    def __init__(self, circuit):
+    def __init__(self, circuit, time=1):
         self.nodes = circuit.nodes
         self.components = circuit.result
         
@@ -10,7 +10,20 @@ class Solver:
         self.identify_node(self.components, self.nodes)
         self.calculate_unknowVoltage(self.components)
         current = self.ohms_law(self.components)
-        self.power_calculation(self.components, current)
+        power = self.power_calculation(self.components, current)
+        energy = self.energy_calculation(power, time)
+        #energy = None
+
+        self.result = {
+            "voltages": {
+                "ground": self.ground_node,
+                "known": self.known_voltage,
+                "unknown": self.unknown_voltage
+            },
+            "currents": current,
+            "power": power,
+            "energy": energy
+        }
     def identify_node(self, components, nodes):
         for component in components:
             if "voltage" in component:
@@ -83,8 +96,13 @@ class Solver:
                     power += (i ** 2) * component["resistance"]
                     current_index += 1
                    
-            print(power)
-            print(current_index)
-            print(currents)
+            #print(power)
+            #print(current_index)
+            #print(currents)
+
+            return power
         else:
             raise ValueError("Current can't be None")
+    def energy_calculation(self, power, time=1):
+        energy = power * time
+        return energy
